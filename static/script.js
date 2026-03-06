@@ -1,10 +1,8 @@
-import { distNormalAtiva } from './main.js'
-
 // Botões de opções de calculos
 const calculosPorModal = {
   discreto: [
     "media",
-    "moda",btn-par-estatisticos
+    "moda",
     "mediana",
     "variancia",
     "desvioPadrao",
@@ -122,13 +120,6 @@ function abrirModalDiscreto() {
   document.getElementById("container_modal_vac").classList.remove("show");
 
   gerarBotoesCalculo("discreto");
-
-  if(distNormalAtiva == true){
-    const formDesordenadoPNormal = document.getElementById(
-        "formDesordenadoPNormal",
-      );
-      formDesordenadoPNormal.style.display = "contents";
-  }
 }
 
 function fecharModalDiscreto() {
@@ -143,12 +134,6 @@ function abrirModalClasses() {
   document.getElementById("container_modal_classes").classList.add("show");
   document.querySelector(".botoes-calcular-limpar").classList.add("descer");
   document.querySelector(".container-opcoes-tipo-dado").classList.add("descer");
-
-  // Habilitar moda de Czuber para dados em classes
-  // const modaCzuber = document.getElementById("modaCzuber");
-  // const modaCzuberLabel = document.querySelector('label[for="modaCzuber"]');
-  // modaCzuber.disabled = false;
-  // modaCzuberLabel.classList.remove("disabled");
 
   gerarBotoesCalculo("classes");
 }

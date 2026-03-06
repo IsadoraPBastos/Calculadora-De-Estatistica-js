@@ -3,7 +3,7 @@ import {
   escolhaTipoDadoFunc,
   setMostrarResultados,
   escolhaTipoIntervaloFunc,
-} from "../../main.js";
+} from "../../state.js";
 
 const formDistExponencial = document.getElementById("formDistExponencial");
 const inputDesvioPadraoExpo = document.getElementById("inputDesvioPadraoExpo");

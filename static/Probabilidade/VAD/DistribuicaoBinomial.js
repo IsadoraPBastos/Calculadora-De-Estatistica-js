@@ -3,7 +3,7 @@ import {
   escolhaTipoDadoFunc,
   setMostrarResultados,
   escolhaTipoIntervaloFunc,
-} from "../../main.js";
+} from "../../state.js";
 
 const formDistBinomial = document.getElementById("formDistBinomial");
 const inputVTotal = document.getElementById("inputVTotal");

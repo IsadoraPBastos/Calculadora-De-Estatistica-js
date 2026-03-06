@@ -248,7 +248,7 @@
           </div>
           {% endif %} -->
 
-          <form style="display: none;" id="formDesordenadoPNormal">
+          <form id="formDesordenadoPNormal">
           <button class="btnCalcularDiscDistNormal">Calcular Dados</button>
           <p class="details">*Esses dados serão processados e enviados para a utilização na Distribuição Normal.</p>
           </form> 
@@ -642,16 +642,15 @@
                  
               </div>
               <div id="secaoDNormal_Final" style="gap: 1rem;">
-                 
-                  <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-bottom: 20px; ">
-                      <h3>📊 Dados Calculados</h3>
-                      <div style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 10px;">
+                  <div id="dadosCalculadosNormal" style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin-bottom: 20px; ">
+                      <!-- <h3>📊 Dados Calculados</h3>
+                      <div  style="display: grid; grid-template-columns: repeat(1, 1fr); gap: 10px;">
                           <div><strong>Média:</strong> </div>
                           <div><strong>Moda</strong> </div>
                          <div><strong>Moda Czuber:</strong> </div>
                           <div><strong>Mediana:</strong></div>
                           <div><strong>Desvio Padrão:</strong> </div>
-                      </div>
+                      </div> -->
                   </div>
                   <form style="align-items: start;">
                         <div class="insercao-infos">
@@ -1178,7 +1177,7 @@
     <div style="padding: 50px;"></div>
   </body>
   
-  <script type="module" src="/static/script.js"></script>
+  <script src="/static/script.js"></script>
   <script type="module" src="/static/main.js"></script>
   <script type="module" src="/static/limparTodosDados.js"></script>
   <script>

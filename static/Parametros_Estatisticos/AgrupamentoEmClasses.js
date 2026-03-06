@@ -3,7 +3,7 @@ import {
   escolhaCalculosFunc,
   escolhaTipoDadoFunc,
   setMostrarResultados,
-} from "../main.js";
+} from "../state.js";
 
 const formDadosClasses = document.getElementById("formDadosClasses");
 const inputLiClasses = document.getElementById("inputLiClasses");

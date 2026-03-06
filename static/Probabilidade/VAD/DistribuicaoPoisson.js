@@ -3,7 +3,7 @@ import {
   escolhaTipoDadoFunc,
   setMostrarResultados,
   escolhaTipoIntervaloFunc,
-} from "../../main.js";
+} from "../../state.js";
 
 const formDistPoisson = document.getElementById("formDistPoisson");
 const inputVMedia = document.getElementById("inputVMedia");

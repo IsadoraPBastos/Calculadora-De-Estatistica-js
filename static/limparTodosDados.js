@@ -4,7 +4,7 @@ import {
   FreqIndAbs,
   tabelaDeDados,
   setMostrarResultados,
-} from "./main.js";
+} from "./state.js";
 
 export function limparTodosDados() {
   setMostrarResultados(false);

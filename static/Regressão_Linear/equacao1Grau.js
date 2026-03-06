@@ -3,7 +3,7 @@ import {
   escolhaCalculosFunc,
   escolhaTipoDadoFunc,
   setMostrarResultados,
-} from "../main.js";
+} from "../state.js";
 
 const formEqu1Grau = document.getElementById("formEqu1Grau");
 const inputValorX = document.getElementById("inputValorX");

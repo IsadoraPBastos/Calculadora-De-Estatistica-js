@@ -3,7 +3,7 @@ import {
   escolhaTipoDadoFunc,
   setMostrarResultados,
   escolhaTipoIntervaloFunc,
-} from "../../main.js";
+} from "../../state.js";
 
 const formDistUniforme = document.getElementById("formDistUniforme");
 const inputLimiteInferior = document.getElementById("inputLimiteInferior");
