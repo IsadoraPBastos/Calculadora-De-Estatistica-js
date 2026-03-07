@@ -276,8 +276,11 @@ function calcular() {
 }
 
 btnCalcular.addEventListener("click", () => {
-  if (dados.length > 0 || Object.keys(tabelaRecebida).length > 0) {
+  if (dados.length > 1 || Object.keys(tabelaRecebida).length > 1) {
+    document.getElementById("msg-erro-zero-division").style.display = "none";
     calcular();
+  } else {
+    document.getElementById("msg-erro-zero-division").style.display = "block";
   }
 });
 
@@ -285,10 +288,7 @@ let btnNormalDiscreto = document.getElementById("btnNormalDiscreto");
 btnNormalDiscreto.addEventListener("click", (e) => {
   e.preventDefault();
   setDistNormalAtiva(true);
-  if (distNormalAtiva == true) {
-    document.getElementById("formDesordenadoPNormal").style.display =
-      "contents";
-  }
+  document.getElementById("formDesordenadoPNormal").style.display = "contents";
 });
 
 let formDesordenadoPNormal = document.getElementById("formDesordenadoPNormal");
@@ -336,6 +336,12 @@ formDesordenadoPNormal.addEventListener("submit", (e) => {
   }
 });
 
+const fecharModalDiscreto = document.querySelector(".botao-fechar-modal");
+fecharModalDiscreto.addEventListener("click", (e) => {
+  e.preventDefault();
+  setDistNormalAtiva(false);
+  document.getElementById("formDesordenadoPNormal").style.display = "none";
+});
 // const titleStatisticsTable = document.getElementById("titleStatisticsTable");
 // const titleClassesOuAmostra = document.getElementById("titleClassesOuAmostra")
 

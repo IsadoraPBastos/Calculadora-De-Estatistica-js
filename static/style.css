@@ -112,7 +112,7 @@ hr {
 }
 
 .container-opcoes-tipo-dado.descer {
-  margin-top: 20%;
+  /* margin-top: 20%; */
   transition: margin-top 0.3s ease;
 }
 
@@ -347,7 +347,6 @@ label[for="modaCzuber"].disabled {
 }
 
 .mostrar-conta {
-  border: black 2px dashed;
   padding: 0px 40px;
   border-radius: 15px;
   font-size: larger;
@@ -451,7 +450,6 @@ label[for="modaCzuber"].disabled {
   display: none;
   margin-top: 4%;
   width: 30%;
-  background-color: #c30d0d;
   color: white;
   border-radius: 5px;
   padding: 10px;
@@ -459,9 +457,15 @@ label[for="modaCzuber"].disabled {
   margin-right: auto;
 }
 
+#msg-erro,
+#msg-erro-calculos,
+#msg-erro-zero-division {
+  background-color: #c30d0d;
+}
+
 #msg-erro-zero-division,
 #msg-erro-outro-vazio {
-  display: block;
+  display: none;
   margin-bottom: 5%;
 }
 

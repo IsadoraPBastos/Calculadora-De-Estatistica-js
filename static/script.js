@@ -55,21 +55,19 @@ function configurarCheckboxTodos() {
     todos.checked = todosMarcados;
   }
 
-  todos.addEventListener("click", () => {
-    const todosMarcados = [...checkboxes].every((cb) => cb.checked);
-
+  todos.addEventListener("change", () => {
     checkboxes.forEach((cb) => {
-      cb.checked = !todosMarcados;
+      cb.checked = todos.checked;
     });
   });
 
   checkboxes.forEach((cb) => {
-    cb.addEventListener("click", verificarTodosCheckboxes);
+    cb.addEventListener("change", verificarTodosCheckboxes);
   });
 }
 
 function gerarBotoesCalculo(tipoModal) {
-  const container = document.querySelector(".container-escolha-calculo");
+  const container = document.getElementById("botoes-escolha-calculo");
 
   container.innerHTML = "";
 
@@ -113,13 +111,17 @@ function gerarBotoesCalculo(tipoModal) {
 gerarBotoesCalculo("discreto");
 
 // Funções para abrir e fechar modais
-function abrirModalDiscreto() {
+function abrirModalDiscreto(normal) {
   document.getElementById("container_modal_discreto").classList.add("show");
   document.querySelector(".botoes-calcular-limpar").classList.add("descer");
   document.querySelector(".container-opcoes-tipo-dado").classList.add("descer");
   document.getElementById("container_modal_vac").classList.remove("show");
 
   gerarBotoesCalculo("discreto");
+
+  if (normal == true) {
+    mostrarDadosDesordenados();
+  }
 }
 
 function fecharModalDiscreto() {

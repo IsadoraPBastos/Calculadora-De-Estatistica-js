@@ -22,6 +22,7 @@ formDistExponencial.addEventListener("submit", (e) => {
       p.innerHTML = "X > " + valorA;
     }
     // Outros intervalos aqui, estão no index.html linha 453
+    mostrarConta.style.border = "2px dashed black";
     mostrarConta.appendChild(p);
   }
 });

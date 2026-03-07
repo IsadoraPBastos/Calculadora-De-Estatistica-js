@@ -23,6 +23,7 @@ formDistUniforme.addEventListener("submit", (e) => {
       p.innerHTML = "X > " + valorCUnif;
     }
     // Outros intervalos aqui, estão no index.html linha 355
+    mostrarConta.style.border = "2px dashed black";
     mostrarConta.appendChild(p);
   }
 });

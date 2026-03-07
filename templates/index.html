@@ -171,7 +171,7 @@
         </div>
         
           <h1>Agrupamento Discreto </h1>
-          <button onclick="mostrarDadosDesordenados()" id="btn-escolha-desordenado" class="btn-mostrar-tipo-discreto">Dados Desordenados</button>
+          <button onclick="mostrarDadosDesordenados(false)" id="btn-escolha-desordenado" class="btn-mostrar-tipo-discreto">Dados Desordenados</button>
           <button onclick="mostrarDadosEmTabela()" id="btn-escolha-tabela" class="btn-mostrar-tipo-discreto">Dados em Tabela</button>
 
           <!-- Parte de inserção de dados - Desordenados -->
@@ -194,12 +194,8 @@
         </div>
           <button id="limpar_desor" value="limpar" class="btn_limpar">Limpar</button>
         </div>
-        <!-- {% if erroDadosDesordenadosUmNum %}
-          <div class="msg-erro" id="msg-erro-zero-division">
-            <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Digite mais de um dado!
           </div>
-          {% endif %} -->
-          </div>
+
 
           <!-- Parte de inserção de dados - Tabela -->
           <div class="divisao-modal-desor-class-eq1" id="secaoDadosEmTabela">
@@ -247,6 +243,9 @@
             <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Digite uma Frequência Individual maior que 0!
           </div>
           {% endif %} -->
+          <div class="msg-erro" id="msg-erro-zero-division">
+            <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Digite mais de um dado!
+          </div>
 
           <form id="formDesordenadoPNormal">
           <button class="btnCalcularDiscDistNormal">Calcular Dados</button>
@@ -541,7 +540,7 @@
           <div class="divisao-modal" id="secaoDNormal">
             <div class="secao-normal">
             <div class="normal-botoes">
-            <button onclick="abrirModalDiscreto()" value="1" id="btnNormalDiscreto" name="reqDistNormal" class="btn-mostrar-tipo-discreto">Agrupamento Discreto</button>
+            <button onclick="abrirModalDiscreto(true)" value="1" id="btnNormalDiscreto" name="reqDistNormal" class="btn-mostrar-tipo-discreto">Agrupamento Discreto</button>
             <button onclick="abrirModalClasses()"value="1" id="btnNormalClasses" name="reqDistNormal" class="btn-mostrar-tipo-discreto">Agrupamento em Classes</button>
             <button onclick="mostrarDNormal_Amostral()" id="btnNormalAmostral" class="btn-mostrar-tipo-discreto">Amostral</button>
             <button onclick="mostrarDNormal_Final()" id="btnNormalFinal" class="btn-mostrar-tipo-discreto">Final</button>
@@ -1024,7 +1023,6 @@
     <!-- Calcular os dados recebidos -->
     <form
       id="form-calculo-dos-dados"
-      method="POST"
     >
       <!-- Tipo do dado -->
       <div class="container-opcoes-tipo-dado">
@@ -1108,25 +1106,24 @@
             style="width: -webkit-fill-available; padding: 5px;"
         /></label>
 
-        <!-- <div id="msg-erro">
-          <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Escolha
-          o tipo das variáveis inseridas!
-        </div> -->
-
-        <!-- {% if erroOutroVazio %}
-        <div id="msg-erro-outro-vazio">
-          <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Digite alguma medida!
+        <div id="msg-erro">
+          <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Escolha o tipo das variáveis inseridas!
         </div>
-        {% endif %} -->
+
+        <div id="msg-erro-outro-vazio">
+          
+        </div>
       </div>
 
       <h1 style="color:white;">Quais <u>cálculos</u> deseja realizar </h1>
       <!-- Botões opção dos cálculos -->
       <div class="container-escolha-calculo">
-        <!-- <div id="msg-erro-calculos">
-          <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Escolha
-          ao menos um cálculo!
-        </div> -->
+        <div id="botoes-escolha-calculo">
+
+        </div>
+        <div id="msg-erro-calculos">
+            <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i> Escolha ao menos um cálculo!
+        </div> 
       </div>
 
       <!-- Botões de calcular e limpar -->
@@ -1490,6 +1487,7 @@
       const msgErro = document.getElementById("msg-erro");
       const msgErroCalculos = document.getElementById("msg-erro-calculos");
       const btnCalcular = document.querySelector(".btn_calcular");
+      const msgErroOutroVazio = document.getElementById("msg-erro-outro-vazio")
 
       formCalculoDosDados.addEventListener("submit", function (event) {
         event.preventDefault()
@@ -1501,21 +1499,28 @@
           'input[name="escolha-calculo"]:checked'
         );
 
-        // if (!tipoSelecionado) {
-        //   event.preventDefault();
-        //   // msgErro.style.display = "block";
-        //   btnCalcular.classList.add("chacoalhar");
-        // } else {
-        //   msgErro.style.display = "none";
-        // }
+        if (!tipoSelecionado) {
+          event.preventDefault();
+          msgErro.style.display = "block";
+          msgErroOutroVazio.style.display = "none";
+          btnCalcular.classList.add("chacoalhar");
+        } else if(outroRadio.checked && outroInput.value.trim() === ""){
+          msgErro.style.display = "none";
+          msgErroOutroVazio.style.backgroundColor = '#c30d0d';
+          msgErroOutroVazio.style.display = "block";
+          msgErroOutroVazio.innerHTML = "<i class='fa-solid fa-triangle-exclamation fa-beat-fade'></i> Digite alguma medida!";
+        } else {
+          msgErro.style.display = "none";
+          msgErroOutroVazio.style.display = "none";
+        }
 
-        // if (!tipoSelecionadoCalculo) {
-        //   event.preventDefault();
-        //   msgErroCalculos.style.display = "block";
-        //   btnCalcular.classList.add("chacoalhar");
-        // } else {
-        //   // msgErroCalculos.style.display = "none";
-        // }
+        if (!tipoSelecionadoCalculo) {
+          event.preventDefault();
+          msgErroCalculos.style.display = "block";
+          btnCalcular.classList.add("chacoalhar");
+        } else {
+          msgErroCalculos.style.display = "none";
+        }
       });
 
       // Event listeners para navegação com TAB/ENTER nos inputs
