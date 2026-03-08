@@ -1,4 +1,3 @@
-import { createElement } from "react";
 import {
   setMostrarResultados,
   escolhaTipoIntervaloFunc,
@@ -12,7 +11,7 @@ const mostrarConta = document.getElementById("mostrarContaPois");
 
 /**P(X = k) em poisson */
 function probPoisson(lambda, k){
-  return(100 * Math.pow(Math.E, -lambda) * Math.pow(lambda, k)) / fatorial(k);
+  return(Math.pow(Math.E, -lambda) * Math.pow(lambda, k)) / fatorial(k);
 }
 
 /**fatorial simples */
@@ -35,27 +34,23 @@ function fmt(v, dec = 6){
 function calcularIntervalo(lambda, valorA, valorB, tipoIntervalo){
   let label = "";
   let valor = 0;
-}
 
-// soma acumulada auxiliar — vai até k = lambda * 10 como limite seguro
-const limiteK = Math.ceil(lambda*10+50);
-
-function acumAte(k){
+  function acumAte(k){
   let soma = 0;
   for (let i = 0; i <= k; i++) soma += probPoisson(lambda, i);
   return soma;
-}
+  }
 
-switch (tipoIntervalo){
+  switch (tipoIntervalo){
   //intervalo simples
   case "maiorQuePoi": //P(X > a) = 1 − P(X ≤ a)
-    label `P(X > ${valorA})`;
+    label = `P(X > ${valorA})`;
     valor = 1 - acumAte(valorA);
    break;
 
   case "maiorIgualPoi"://P(X ≥ a) = 1 − P(X ≤ a−1)
     label = `P(X >= ${valorA})`;
-    VALOR = 1 - acumAte(valorA - 1);
+    valor = 1 - acumAte(valorA - 1);
     break;
 
   case "menorQuePoi": //P(X < a) = P(X ≤ a−1)
@@ -65,6 +60,7 @@ switch (tipoIntervalo){
 
   case "menorIgualPoi": //P(X ≤ a)
     label = `P(X <= ${valorA})`;
+    valor = acumAte(valorA);
     break;
 
   case "intervaloIgualPoi"://P(X = a)
@@ -86,7 +82,7 @@ switch (tipoIntervalo){
 
   case "menorQueMenorIgualPoi"://P(a < X ≤ b)
     label = `P(${valorA} < X <= ${valorB})`;
-    valor = acumAte(valorB) - acumAte(valorA - 1);
+    valor = acumAte(valorB) - acumAte(valorA);
     break;
 
   case "menorIgualMenorIgualPoi"://P(a ≤ X ≤ b)
@@ -98,7 +94,8 @@ switch (tipoIntervalo){
     label = "";
     valor = null;
   } 
-return {label, valor};
+  return {label, valor};
+}
 
 //--- renderização de resultado ---
 function renderizarResultados(lambda, tipoIntervalo, valorA, valorB){
@@ -151,17 +148,17 @@ function renderizarResultados(lambda, tipoIntervalo, valorA, valorB){
   //card tabela completa
   //Exibe k = 0 até o menor k onde P acumulada > 0.9999
   const divTabela = document.createElement("div");
-  divTabela.classnName = "calculos-resultados";
+  divTabela.className = "calculos-resultados";
 
   const h3Tabela = document.createElement("h3");
   h3Tabela.innerHTML = "Distribuição Completa";
   divTabela.appendChild(h3Tabela);
 
-  const pParams = document;createElement("p");
+  const pParams = document.createElement("p");
   pParams.innerHTML = `λ = ${fmt(lambda, 6)}`;
   divTabela.appendChild(pParams);
 
-  const table = document.createElement("p");
+  const table = document.createElement("table");
   const thead = document.createElement("thead");
   const trHead = document.createElement("tr");
 
@@ -173,28 +170,94 @@ function renderizarResultados(lambda, tipoIntervalo, valorA, valorB){
   thead.appendChild(trHead);
   table.appendChild(thead);
 
-  const tbody = document.createElementNS("tbody");
+  const tbody = document.createElement("tbody");
   let acumInf = 0;
   let k = 0;
 
   //gera linhas até a probabilidade acumulada cobrir 99.99%
-  //amanhã eu termino, to com sono
+ while (acumInf < 0.9999){
+  const pk = probPoisson(lambda, k);
+  acumInf += pk;
+
+  //acumulada superior: 1 − P(X ≤ k−1)
+  const acumSup = k === 0 ? 1 : 1 - (acumInf - pk);
+  const tr = document.createElement("tr");
+  for(const valor of [
+    k,
+    fmt(pk, 8),
+    fmt(Math.min(acumInf, 1), 8),
+    fmt(Math.max(acumSup, 0), 8),
+  ]){
+  const td = document.createElement("td");
+  td.innerHTML = valor;
+  tr.appendChild(td); 
+  }
+
+  tbody.appendChild(tr);
+  k++;
+ }
+
+ table.appendChild(tbody);
+ divTabela.appendChild(table)
+ containerCalculosResultados.appendChild(divTabela);
+
+ setMostrarResultados(true);
 }
 
-
-
+const intervaloDuplo = [
+  "menorQueMenorQuePoi",
+  "menorIgualMenorQuePoi",
+  "menorQueMenorIgualPoi",
+  "menorIgualMenorIgualPoi",
+]
 
 formDistPoisson.addEventListener("submit", (e) => {
   e.preventDefault();
-  let valorA = +inputValorA.value.trim();
-  let escolhaTipoIntervalo = escolhaTipoIntervaloFunc();
+  setMostrarResultados(false);
 
-  if (escolhaTipoIntervalo != "") {
-    const p = document.createElement("p");
-    if (escolhaTipoIntervalo == "maiorQuePoi") {
-      p.innerHTML = "X > " + valorA;
-    }
-    // Outros intervalos aqui, estão no index.html linha 899
-    mostrarConta.appendChild(p);
+  const lambda = parseFloat(inputVMedia.value.trim());
+  const valorA = parseInt(inputValorA.value.trim(), 10);
+  const valorB = parseInt(inputValorB.value.trim(), 10);
+  const tipoIntervalo = escolhaTipoIntervaloFunc();
+
+  //validation
+  if (isNaN(lambda) || lambda <= 0){
+    mostrarConta.innerHTML = `<p class="msg-erro">
+      <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+      "Média / Lambda" deve ser um número positivo!
+    </p>`;
+    return;
   }
+  if (isNaN(valorA) || valorA < 0){
+    mostrarConta.innerHTML = `<p class="msg-erro">
+      <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+      "Valor A" deve ser um inteiro maior ou igual a 0!
+    </p>`
+    return;
+  }
+  if (!tipoIntervalo){
+    mostrarConta.innerHTML = `<p class="msg-erro">
+      <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+      Selecione um tipo de intervalo!
+    </p>`;
+    return;
+  }
+  if (intervaloDuplo.includes(tipoIntervalo)){
+    if(isNaN(valorB) || valorB < 0){
+      mostrarConta.innerHTML = `<p class="msg-erro">
+        <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+        "Valor B" deve ser um inteiro maior ou igual a 0!
+      </p>`;
+      return;
+    }
+    if (valorB <= valorA){
+      mostrarConta.innerHTML = `<p class="msg-erro">
+        <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+        "Valor B" deve ser maior que "Valor A"!
+      </p>`;
+      return;
+    }
+  }
+
+  renderizarResultados(lambda, tipoIntervalo, valorA, valorB);
 });
