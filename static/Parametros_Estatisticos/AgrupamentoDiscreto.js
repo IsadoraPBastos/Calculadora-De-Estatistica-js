@@ -8,6 +8,7 @@ import {
   setDistNormalAtiva,
   distNormalAtiva,
   distNormalDados,
+  modoCalculo,
 } from "../state.js";
 
 // Dados Desordenados
@@ -248,7 +249,7 @@ function calcular() {
           mediana = "R$ " + mediana;
         } else if (escolhaTipoDado != "R$" && escolhaTipoDado != "semMedida") {
           mediana = mediana + " " + escolhaTipoDado;
-        } 
+        }
         p.innerHTML = mediana;
       }
       if (escolha === "variancia") {
@@ -295,14 +296,17 @@ function calcular() {
 }
 
 btnCalcular.addEventListener("click", () => {
-  if (dados.length > 1 || Object.keys(tabelaRecebida).length > 1) {
-    document.getElementById("msg-erro-zero-division").style.display = "none";
-    calcular();
-  } else {
-    document.getElementById("msg-erro-zero-division").style.display = "block";
+  if (modoCalculo == "Discreto") {
+    if (dados.length > 1 || Object.keys(tabelaRecebida).length > 1) {
+      document.getElementById("msg-erro-zero-division").style.display = "none";
+      calcular();
+    } else {
+      document.getElementById("msg-erro-zero-division").style.display = "block";
+    }
   }
 });
 
+// Agrupamento Discreto pela Distribuição Normal
 let btnNormalDiscreto = document.getElementById("btnNormalDiscreto");
 btnNormalDiscreto.addEventListener("click", (e) => {
   e.preventDefault();

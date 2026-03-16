@@ -3,6 +3,7 @@ import {
   escolhaTipoIntervaloFunc,
   escolhaCalculosFunc,
   escolhaTipoDadoFunc,
+  modoCalculo,
 } from "../../state.js";
 
 const formDistPoisson = document.getElementById("formDistPoisson");
@@ -341,6 +342,7 @@ function validar() {
   } else {
     let escolhaTipoIntervalo = escolhaTipoIntervaloFunc();
     const p = document.createElement("p");
+    console.log(escolhaTipoIntervalo);
     mostrarConta.replaceChildren();
     if (escolhaTipoIntervalo == "maiorQuePoi") {
       p.innerHTML = "X > " + valorA;
@@ -364,21 +366,27 @@ function validar() {
 formDistPoisson.addEventListener("submit", (e) => {
   e.preventDefault();
   containerTabelaDistribuicao.replaceChildren();
-  validar();
+  if (modoCalculo == "Poisson") {
+    console.log("Poisson 1");
+    validar();
+  }
 });
 
 const btnCalcular = document.getElementById("btnCalcular");
 btnCalcular.addEventListener("click", (e) => {
   e.preventDefault();
-  const lambda = parseFloat(inputVMedia.value.trim());
-  const valorA = parseInt(inputValorA.value.trim(), 10);
-  const valorB = parseInt(inputValorB.value.trim(), 10);
-  const tipoIntervalo = escolhaTipoIntervaloFunc();
-  if (!isNaN(lambda) && !isNaN(valorA) && tipoIntervalo != "") {
-    setMostrarResultados(false);
-    let verificar = validar();
-    if (verificar == true) {
-      renderizarResultados(lambda, tipoIntervalo, valorA, valorB);
+  if (modoCalculo == "Poisson") {
+    console.log("Poisson 2");
+    const lambda = parseFloat(inputVMedia.value.trim());
+    const valorA = parseInt(inputValorA.value.trim(), 10);
+    const valorB = parseInt(inputValorB.value.trim(), 10);
+    const tipoIntervalo = escolhaTipoIntervaloFunc();
+    if (!isNaN(lambda) && !isNaN(valorA) && tipoIntervalo != "") {
+      setMostrarResultados(false);
+      let verificar = validar();
+      if (verificar == true) {
+        renderizarResultados(lambda, tipoIntervalo, valorA, valorB);
+      }
     }
   }
 });

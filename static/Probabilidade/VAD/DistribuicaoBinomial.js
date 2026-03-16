@@ -3,6 +3,7 @@ import {
   escolhaTipoIntervaloFunc,
   escolhaCalculosFunc,
   escolhaTipoDadoFunc,
+  modoCalculo,
 } from "../../state.js";
 
 const formDistBinomial = document.getElementById("formDistBinomial");
@@ -400,6 +401,7 @@ function validar() {
     } else if (isNaN(qDigitado)) {
       inputProbabInsucesso.value = 1 - pS;
     }
+    console.log(p);
     mostrarConta.style.border = "2px dashed black";
     mostrarConta.appendChild(p);
     return true;
@@ -409,31 +411,38 @@ function validar() {
 formDistBinomial.addEventListener("submit", (e) => {
   e.preventDefault();
   containerTabelaDistribuicao.replaceChildren();
-  validar();
+  if (modoCalculo == "Binomial") {
+    console.log("Binomial 1");
+    validar();
+  }
 });
 
 const btnCalcular = document.getElementById("btnCalcular");
 btnCalcular.addEventListener("click", (e) => {
   e.preventDefault();
-  const n = parseInt(inputVTotal.value.trim(), 10);
-  let p = parseFloat(inputProbabSucesso.value.trim());
-  const qDigitado = parseFloat(inputProbabInsucesso.value.trim());
-  if (isNaN(p) && !isNaN(qDigitado)) p = 1 - qDigitado;
 
-  const valorA = parseInt(inputValorA.value.trim(), 10);
-  const valorB = parseInt(inputValorB.value.trim(), 10);
-  const tipoIntervalo = escolhaTipoIntervaloFunc();
-  if (
-    !Number.isNaN(n) &&
-    !Number.isNaN(p) &&
-    !Number.isNaN(valorA) &&
-    tipoIntervalo != ""
-  ) {
-    let verficar = validar();
-    console.log(verficar);
-    if (verficar == true) {
-      setMostrarResultados(false);
-      renderizarResultados(n, p, tipoIntervalo, valorA, valorB);
+  if (modoCalculo == "Binomial") {
+    console.log("Binomial 2");
+    const n = parseInt(inputVTotal.value.trim(), 10);
+    let p = parseFloat(inputProbabSucesso.value.trim());
+    const qDigitado = parseFloat(inputProbabInsucesso.value.trim());
+    if (isNaN(p) && !isNaN(qDigitado)) p = 1 - qDigitado;
+
+    const valorA = parseInt(inputValorA.value.trim(), 10);
+    const valorB = parseInt(inputValorB.value.trim(), 10);
+    const tipoIntervalo = escolhaTipoIntervaloFunc();
+    if (
+      !Number.isNaN(n) &&
+      !Number.isNaN(p) &&
+      !Number.isNaN(valorA) &&
+      tipoIntervalo != ""
+    ) {
+      let verficar = validar();
+      console.log(verficar);
+      if (verficar == true) {
+        setMostrarResultados(false);
+        renderizarResultados(n, p, tipoIntervalo, valorA, valorB);
+      }
     }
   }
 });

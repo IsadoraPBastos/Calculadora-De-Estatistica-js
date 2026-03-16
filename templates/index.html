@@ -337,7 +337,7 @@
         
           <h1>Variáveis Aleatórias Contínuas - VAC</h1>
           <button onclick="mostrarDUnifor()" id="btn-escolha-uniforme" class="btn-mostrar-tipo-discreto">Distribuição Uniforme</button>
-          <button onclick="mostrarDExpo()" id="btn-escolha-exponecial" class="btn-mostrar-tipo-discreto">Distribuição Exponencial</button>
+          <button onclick="mostrarDExpo()" id="btn-escolha-exponencial" class="btn-mostrar-tipo-discreto">Distribuição Exponencial</button>
           <button onclick="mostrarDNormal()" id="btn-escolha-normal" class="btn-mostrar-tipo-discreto">Distribuição Normal</button>
 
           <!-- Parte de inserção de dados - Distribuição Uniforme -->
@@ -355,7 +355,7 @@
                   <div class="container-opcoes-tipo-intervalo">
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="maiorQueUni"
                         value="maiorQueUni"
                         class="escolha-tipo-dado"
@@ -363,7 +363,7 @@
                       <label for="maiorQueUni" class="opcao-tipo-intervalo">></label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="maiorIgualUni"
                         value="maiorIgualUni"
                         class="escolha-tipo-dado"
@@ -371,7 +371,7 @@
                       <label for="maiorIgualUni" class="opcao-tipo-intervalo">≥</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorQueUni"
                         value="menorQueUni"
                         class="escolha-tipo-dado"
@@ -379,7 +379,7 @@
                       <label for="menorQueUni" class="opcao-tipo-intervalo"><</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorIgualUni"
                         value="menorIgualUni"
                         class="escolha-tipo-dado"
@@ -388,7 +388,7 @@
                         <br>
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorQueMenorQueUni"
                         value="menorQueMenorQueUni"
                         class="escolha-tipo-dado"
@@ -396,7 +396,7 @@
                       <label for="menorQueMenorQueUni"class="opcao-tipo-intervalo">< <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorIgualMenorQueUni"
                         value="menorIgualMenorQueUni"
                         class="escolha-tipo-dado"
@@ -404,7 +404,7 @@
                       <label for="menorIgualMenorQueUni" class="opcao-tipo-intervalo">≤ <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorQueMenorIgualUni"
                         value="menorQueMenorIgualUni"
                         class="escolha-tipo-dado"
@@ -412,7 +412,7 @@
                       <label for="menorQueMenorIgualUni" class="opcao-tipo-intervalo">< ≤</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="menorIgualMenorIgualUni"
                         value="menorIgualMenorIgualUni"
                         class="escolha-tipo-dado"
@@ -421,7 +421,7 @@
                       <br>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloUni"
                         id="intervaloIgualUni"
                         value="intervaloIgualUni"
                         class="escolha-tipo-dado"
@@ -453,7 +453,7 @@
                   <div class="container-opcoes-tipo-intervalo">
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="maiorQueExpo"
                         value="maiorQueExpo"
                         class="escolha-tipo-dado"
@@ -461,7 +461,7 @@
                       <label for="maiorQueExpo" class="opcao-tipo-intervalo">></label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="maiorIgualExpo"
                         value="maiorIgualExpo"
                         class="escolha-tipo-dado"
@@ -469,7 +469,7 @@
                       <label for="maiorIgualExpo" class="opcao-tipo-intervalo">≥</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorQueExpo"
                         value="menorQueExpo"
                         class="escolha-tipo-dado"
@@ -477,7 +477,7 @@
                       <label for="menorQueExpo" class="opcao-tipo-intervalo"><</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorIgualExpo"
                         value="menorIgualExpo"
                         class="escolha-tipo-dado"
@@ -486,7 +486,7 @@
                         <br>
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorQueMenorQueExpo"
                         value="menorQueMenorQueExpo"
                         class="escolha-tipo-dado"
@@ -494,7 +494,7 @@
                       <label for="menorQueMenorQueExpo"class="opcao-tipo-intervalo">< <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorIgualMenorQueExpo"
                         value="menorIgualMenorQueExpo"
                         class="escolha-tipo-dado"
@@ -502,7 +502,7 @@
                       <label for="menorIgualMenorQueExpo" class="opcao-tipo-intervalo">≤ <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorQueMenorIgualExpo"
                         value="menorQueMenorIgualExpo"
                         class="escolha-tipo-dado"
@@ -510,7 +510,7 @@
                       <label for="menorQueMenorIgualExpo" class="opcao-tipo-intervalo">< ≤</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="menorIgualMenorIgualExpo"
                         value="menorIgualMenorIgualExpo"
                         class="escolha-tipo-dado"
@@ -519,7 +519,7 @@
                       <br>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloExpo"
                         id="intervaloIgualExpo"
                         value="intervaloIgualExpo"
                         class="escolha-tipo-dado"
@@ -735,15 +735,10 @@
                       <label for="intervaloIgualNormF" class="opcao-tipo-intervalo">=</label>
                   </div>
                         <button class="botao-calcular-normal">Calcular</button>
-                    </form>
-                    
-                  
-                </div>
-
-                <div class="mostrar-conta">
-                  
+                    </form>                
+                  </div>
+                <div class="mostrar-conta">            
               </div>
-
           </div>
         </div>
       </div>
@@ -776,7 +771,7 @@
                     <div class="container-opcoes-tipo-intervalo">
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="maiorQueBin"
                         value="maiorQueBin"
                         class="escolha-tipo-dado"
@@ -784,7 +779,7 @@
                       <label for="maiorQueBin" class="opcao-tipo-intervalo">></label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="maiorIgualBin"
                         value="maiorIgualBin"
                         class="escolha-tipo-dado"
@@ -792,7 +787,7 @@
                       <label for="maiorIgualBin" class="opcao-tipo-intervalo">≥</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorQueBin"
                         value="menorQueBin"
                         class="escolha-tipo-dado"
@@ -800,7 +795,7 @@
                       <label for="menorQueBin" class="opcao-tipo-intervalo"><</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorIgualBin"
                         value="menorIgualBin"
                         class="escolha-tipo-dado"
@@ -809,7 +804,7 @@
                         <br>
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorQueMenorQueBin"
                         value="menorQueMenorQueBin"
                         class="escolha-tipo-dado"
@@ -817,7 +812,7 @@
                       <label for="menorQueMenorQueBin"class="opcao-tipo-intervalo">< <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorIgualMenorQueBin"
                         value="menorIgualMenorQueBin"
                         class="escolha-tipo-dado"
@@ -825,7 +820,7 @@
                       <label for="menorIgualMenorQueBin" class="opcao-tipo-intervalo">≤ <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorQueMenorIgualBin"
                         value="menorQueMenorIgualBin"
                         class="escolha-tipo-dado"
@@ -833,7 +828,7 @@
                       <label for="menorQueMenorIgualBin" class="opcao-tipo-intervalo">< ≤</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="menorIgualMenorIgualBin"
                         value="menorIgualMenorIgualBin"
                         class="escolha-tipo-dado"
@@ -842,7 +837,7 @@
                       <br>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloBin"
                         id="intervaloIgualBin"
                         value="intervaloIgualBin"
                         class="escolha-tipo-dado"
@@ -875,7 +870,7 @@
                       <div class="container-opcoes-tipo-intervalo">
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="maiorQuePoi"
                         value="maiorQuePoi"
                         class="escolha-tipo-dado"
@@ -883,7 +878,7 @@
                       <label for="maiorQuePoi" class="opcao-tipo-intervalo">></label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="maiorIgualPoi"
                         value="maiorIgualPoi"
                         class="escolha-tipo-dado"
@@ -891,7 +886,7 @@
                       <label for="maiorIgualPoi" class="opcao-tipo-intervalo">≥</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorQuePoi"
                         value="menorQuePoi"
                         class="escolha-tipo-dado"
@@ -899,7 +894,7 @@
                       <label for="menorQuePoi" class="opcao-tipo-intervalo"><</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorIgualPoi"
                         value="menorIgualPoi"
                         class="escolha-tipo-dado"
@@ -908,7 +903,7 @@
                         <br>
                      <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorQueMenorQuePoi"
                         value="menorQueMenorQuePoi"
                         class="escolha-tipo-dado"
@@ -916,7 +911,7 @@
                       <label for="menorQueMenorQuePoi"class="opcao-tipo-intervalo">< <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorIgualMenorQuePoi"
                         value="menorIgualMenorQuePoi"
                         class="escolha-tipo-dado"
@@ -924,7 +919,7 @@
                       <label for="menorIgualMenorQuePoi" class="opcao-tipo-intervalo">≤ <</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorQueMenorIgualPoi"
                         value="menorQueMenorIgualPoi"
                         class="escolha-tipo-dado"
@@ -932,7 +927,7 @@
                       <label for="menorQueMenorIgualPoi" class="opcao-tipo-intervalo">< ≤</label>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="menorIgualMenorIgualPoi"
                         value="menorIgualMenorIgualPoi"
                         class="escolha-tipo-dado"
@@ -941,7 +936,7 @@
                       <br>
                       <input
                         type="radio"
-                        name="intervalo"
+                        name="intervaloPoi"
                         id="intervaloIgualPoi"
                         value="intervaloIgualPoi"
                         class="escolha-tipo-dado"
@@ -1022,7 +1017,7 @@
     </div>
 
     <!-- Calcular os dados recebidos -->
-    <form
+    <div
       id="form-calculo-dos-dados"
     >
       <!-- Tipo do dado -->
@@ -1132,7 +1127,7 @@
         <input type="hidden" name="modal_aberto" value="" />
         <button class="btn_calcular" id="btnCalcular"><b>Calcular</b></button>
       
-    </form>
+      </div>
     <div>
       <button class="btn_limpar_tudo">Limpar</button>
     </div>
@@ -1180,6 +1175,7 @@
   
   <script src="/static/script.js"></script>
   <script type="module" src="/static/main.js"></script>
+  <script type="module" src="/static/modoCalculo.js"></script>
   <script type="module" src="/static/limparTodosDados.js"></script>
   <script>
       // SISTEMA DE FOCO AUTOMÁTICO PARA TODOS OS INPUTS
@@ -1484,16 +1480,14 @@
       });
       
 
-      const formCalculoDosDados = document.getElementById(
-        "form-calculo-dos-dados"
+      const btnCalcular = document.getElementById(
+        "btnCalcular"
       );
-
       const msgErro = document.getElementById("msg-erro");
       const msgErroCalculos = document.getElementById("msg-erro-calculos");
-      const btnCalcular = document.querySelector(".btn_calcular");
       const msgErroOutroVazio = document.getElementById("msg-erro-outro-vazio")
 
-      formCalculoDosDados.addEventListener("submit", function (event) {
+      btnCalcular.addEventListener("click", function (event) {
         event.preventDefault()
         const tipoSelecionado = document.querySelector(
           'input[name="tipo"]:checked'

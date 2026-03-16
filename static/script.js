@@ -241,7 +241,7 @@ function mostrarDUnifor() {
   secaoDNormal.style.display = "none";
 
   document.getElementById("btn-escolha-uniforme").classList.add("ativo");
-  document.getElementById("btn-escolha-exponecial").classList.remove("ativo");
+  document.getElementById("btn-escolha-exponencial").classList.remove("ativo");
   document.getElementById("btn-escolha-normal").classList.remove("ativo");
 }
 
@@ -250,7 +250,7 @@ function mostrarDExpo() {
   secaoDUnifor.style.display = "none";
   secaoDNormal.style.display = "none";
 
-  document.getElementById("btn-escolha-exponecial").classList.add("ativo");
+  document.getElementById("btn-escolha-exponencial").classList.add("ativo");
   document.getElementById("btn-escolha-uniforme").classList.remove("ativo");
   document.getElementById("btn-escolha-normal").classList.remove("ativo");
 }
@@ -260,7 +260,7 @@ function mostrarDNormal() {
   secaoDUnifor.style.display = "none";
   secaoDNormal.style.display = "flex";
 
-  document.getElementById("btn-escolha-exponecial").classList.remove("ativo");
+  document.getElementById("btn-escolha-exponencial").classList.remove("ativo");
   document.getElementById("btn-escolha-uniforme").classList.remove("ativo");
   document.getElementById("btn-escolha-normal").classList.add("ativo");
 }
@@ -411,7 +411,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!container || !inputB) return;
 
     const radios = container.querySelectorAll(
-      'input[type="radio"][name="intervalo"]',
+      'input[type="radio"][name^="intervalo"]',
     );
 
     radios.forEach((radio) => {
