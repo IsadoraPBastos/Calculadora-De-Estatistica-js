@@ -419,9 +419,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (intervalosComB.includes(radio.value)) {
           inputB.classList.remove("hidden");
           inputB.style.display = "inline-block";
+          if (inputBId == "inputDuasVariaveisNormF") {
+            const buttonsB = container.querySelectorAll(".btnValueBDistNorm");
+            buttonsB.forEach((buttonB) => {
+              buttonB.style = "display: inline;";
+            });
+          }
         } else {
           inputB.classList.add("hidden");
           inputB.style.display = "none";
+          if (inputBId == "inputDuasVariaveisNormF") {
+            const buttonsB = container.querySelectorAll(".btnValueBDistNorm");
+            buttonsB.forEach((buttonB) => {
+              buttonB.style = "display: none;";
+            });
+          }
         }
       });
     });

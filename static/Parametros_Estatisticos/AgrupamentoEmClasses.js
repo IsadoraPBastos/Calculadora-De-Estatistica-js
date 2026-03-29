@@ -3,6 +3,8 @@ import {
   escolhaCalculosFunc,
   escolhaTipoDadoFunc,
   setMostrarResultados,
+  setDistNormalAtiva,
+  distNormalAtiva,
 } from "../state.js";
 
 // ─── Elementos do DOM ───────────────────────────────────────────────────────
@@ -132,7 +134,6 @@ function handleDadosClasse() {
     tbodyClasses.appendChild(tr);
   }
 
-  console.log("FOiBBBBBBBBBBBBB");
   // Foco no primeiro input de FI
   const primeiro = tbodyClasses.querySelector("input[type='number']");
   if (primeiro) setTimeout(() => primeiro.focus(), 60);
@@ -354,7 +355,6 @@ function calcularClasses() {
   dadosClasses["ModaCzuber"] = fmtD(modaCzuber);
   dadosClasses["Mediana"] = fmtD(mediana);
   dadosClasses["DesvioPadrao"] = fmtD(desvioPadrao);
-  dadosClasses["Variancia"] = fmtD(variancia);
 
   // ─── Exibir cards de resultado ─────────────────────────────────────────────
   const escolhasCalculo = escolhaCalculosFunc();
@@ -481,7 +481,11 @@ function calcularClasses() {
   );
 
   // destacarClassesEspeciais();
-  setMostrarResultados(true);
+  if (distNormalAtiva == true) {
+    setMostrarResultados(false);
+  } else {
+    setMostrarResultados(true);
+  }
 }
 
 // ─── Tabela de Distribuição de Frequências ────────────────────────────────────
@@ -637,3 +641,118 @@ function gerarTabelaDistribuicao(
   div.appendChild(div2);
   container.appendChild(div);
 }
+
+// Agrupamento em Classes pela Distribuição Normal
+let btnNormalClasses = document.getElementById("btnNormalClasses");
+btnNormalClasses.addEventListener("click", (e) => {
+  e.preventDefault();
+  setDistNormalAtiva(true);
+  document.getElementById("container_modal_vac").classList.remove("show");
+  document.getElementById("formClassesPNormal").style.display = "contents";
+});
+
+let formClassesPNormal = document.getElementById("formClassesPNormal");
+formClassesPNormal.addEventListener("submit", (e) => {
+  e.preventDefault();
+  setMostrarResultados(false);
+  if (distNormalAtiva == true) {
+    calcularClasses();
+    console.log(dadosClasses);
+  }
+
+  const container = document.getElementById("containerTabelaDistribuicao");
+  container.innerHTML = "";
+
+  setDistNormalAtiva(false);
+  document.getElementById("formClassesPNormal").style.display = "none";
+  document.getElementById("container_modal_classes").classList.remove("show");
+  document.getElementById("container_modal_vac").classList.add("show");
+  document.getElementById("secaoDNormal").style.display = "flex";
+  document.getElementById("secaoDNormal_Final").style.display = "flex";
+
+  function btnValueAClick(value) {
+    const inputValorANormFinal = document.getElementById(
+      "inputValorANormFinal",
+    );
+    inputValorANormFinal.value = value;
+  }
+
+  function btnValueBClick(value) {
+    const inputDuasVariaveisNormF = document.getElementById(
+      "inputDuasVariaveisNormF",
+    );
+    inputDuasVariaveisNormF.value = value;
+  }
+
+  if (Object.keys(dadosClasses).length > 0) {
+    dadosCalculadosNormal.replaceChildren();
+
+    const div2 = document.createElement("div");
+    div2.style =
+      "display: grid; grid-template-columns: repeat(1, 1fr); gap: 10px; justify-items: end;";
+
+    const h3 = document.createElement("h3");
+    h3.textContent = "📊 Dados Calculados";
+    dadosCalculadosNormal.appendChild(h3);
+
+    const p = document.createElement("p");
+    p.textContent = "Usar como valor de: ";
+    p.style = "margin: 0";
+    div2.appendChild(p);
+
+    for (const [key, value] of Object.entries(dadosClasses)) {
+      const div = document.createElement("div");
+
+      let text;
+      const strong = document.createElement("strong");
+      if (key == "Media") {
+        text = "Média";
+      } else if (key == "ModaBruta") {
+        text = "Moda Bruta";
+      } else if (key == "ModaCzuber") {
+        text = "Moda Czuber";
+      } else if (key == "DesvioPadrao") {
+        text = "Desvio Padrão";
+      } else {
+        text = key;
+      }
+      strong.textContent = text + ": ";
+
+      div.appendChild(strong);
+      div.append(value);
+
+      const buttonA = document.createElement("button");
+      buttonA.className = "btnValueDistNorm";
+      buttonA.innerHTML = "A";
+
+      buttonA.addEventListener("click", () => {
+        btnValueAClick(value);
+      });
+
+      const buttonB = document.createElement("button");
+      buttonB.className = "btnValueBDistNorm";
+      buttonB.innerHTML = "B";
+
+      buttonB.addEventListener("click", () => {
+        btnValueBClick(value);
+      });
+
+      div.appendChild(buttonA);
+      div.appendChild(buttonB);
+
+      div2.appendChild(div);
+
+      dadosCalculadosNormal.appendChild(div2);
+    }
+  }
+});
+
+const fecharModalClasses = document.querySelector(
+  ".botao-fechar-modal-classes",
+);
+fecharModalClasses.addEventListener("click", (e) => {
+  e.preventDefault();
+  setDistNormalAtiva(false);
+  console.log("Entrou");
+  document.getElementById("formClassesPNormal").style.display = "none";
+});

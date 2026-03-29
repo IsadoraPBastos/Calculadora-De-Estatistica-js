@@ -67,4 +67,5 @@ export function setModoCalculo(valor) {
 
 if (distNormalAtiva == false) {
   document.getElementById("formDesordenadoPNormal").style.display = "none";
+  document.getElementById("formClassesPNormal").style.display = "none";
 }

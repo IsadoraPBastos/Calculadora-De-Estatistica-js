@@ -27,6 +27,11 @@ btnNormalDiscreto.addEventListener("click", (e) => {
   setDistNormalAtiva(true);
 });
 
+btnNormalClasses.addEventListener("click", (e) => {
+  e.preventDefault();
+  setDistNormalAtiva(true);
+});
+
 // Linha 522 do index.html
 formDistNormalAmostral.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -36,9 +41,12 @@ formDistNormalAmostral.addEventListener("submit", (e) => {
   console.log(tipoIntervalo);
 });
 
+const inputValorANormFinal = document.getElementById("inputValorANormFinal");
+
 formDistNormalFinal.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const tipoIntervalo = escolhaTipoIntervaloFunc();
   console.log(tipoIntervalo);
+  console.log(inputValorANormFinal.value);
 });

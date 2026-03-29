@@ -333,6 +333,8 @@ formDesordenadoPNormal.addEventListener("submit", (e) => {
   document.getElementById("secaoDNormal_Final").style.display = "flex";
 
   if (Object.keys(distNormalDados).length > 0) {
+    dadosCalculadosNormal.replaceChildren();
+
     const h3 = document.createElement("h3");
     h3.textContent = "📊 Dados Calculados";
     dadosCalculadosNormal.appendChild(h3);
@@ -363,6 +365,7 @@ const fecharModalDiscreto = document.querySelector(".botao-fechar-modal");
 fecharModalDiscreto.addEventListener("click", (e) => {
   e.preventDefault();
   setDistNormalAtiva(false);
+  console.log("Entrou 2");
   document.getElementById("formDesordenadoPNormal").style.display = "none";
 });
 // const titleStatisticsTable = document.getElementById("titleStatisticsTable");
