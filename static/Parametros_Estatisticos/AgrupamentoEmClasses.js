@@ -211,6 +211,14 @@ function validar() {
       vazio += "";
     }
   });
+  let escolhasCalculo = escolhaCalculosFunc();
+  if (escolhasCalculo.length == 0) {
+    vazio += "semEscolhaCalc";
+  }
+  let escolhaTipoDado = escolhaTipoDadoFunc();
+  if (escolhaTipoDado == null) {
+    vazio += "semEscolhaDado";
+  }
   return vazio;
 }
 

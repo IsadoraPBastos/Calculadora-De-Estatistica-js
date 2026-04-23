@@ -59,18 +59,27 @@ formDadosEmTabela.addEventListener("submit", (e) => {
   mostrarDadosInseridosDesor.textContent = "";
 
   const valorAmo = +amostra.value.trim();
-  const valorFreq = +freq.value.trim();
+  const valorFreq = parseInt(freq.value.trim());
+  const msgErro = document.getElementById("msg-erro-discreto");
   if (
     isNaN(valorAmo) ||
     isNaN(valorFreq) ||
     amostra.value === "" ||
     freq.value === "" ||
     freq.value <= 0
-  )
+  ) {
+    msgErro.innerHTML = `<i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+    "Valor da amostra está incorreto ou frequência está abaixo de 0!"`;
+    msgErro.style.display = "block";
     return;
-  if (valorAmo in tabelaRecebida) {
-    // Fazer uma mensagem de erro
+  } else if (valorAmo in tabelaRecebida) {
+    msgErro.innerHTML = `<i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+    "Amostra já inserida!"`;
+    msgErro.style.display = "block";
     return;
+  } else {
+    msgErro.innerHTML = ``;
+    msgErro.style.display = "none";
   }
   tabelaRecebida[valorAmo] = valorFreq;
 
@@ -242,7 +251,6 @@ function calcular() {
     let j = 0;
     let k = 1;
     let posicoes = "";
-    //[ 2: 5, 6: 3, 7: 4 ]
     for (const [amostra, freq] of Object.entries(FreqIndAbs)) {
       if (k == 1) {
         j = freq;
@@ -265,6 +273,7 @@ function calcular() {
     const frequencyTableValues = document.getElementById(
       "frequencyTableValues",
     );
+    frequencyTableValues.replaceChildren();
 
     for (const [amostra, info] of Object.entries(statistics)) {
       const tr = document.createElement("tr");

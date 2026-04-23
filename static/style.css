@@ -477,6 +477,7 @@ label[for="modaCzuber"].disabled {
 #msg-erro,
 #msg-erro-calculos,
 #msg-erro-zero-division,
+#msg-erro-discreto,
 #msg-erro-outro-vazio {
   display: none;
   margin-top: 4%;
@@ -490,7 +491,8 @@ label[for="modaCzuber"].disabled {
 
 #msg-erro,
 #msg-erro-calculos,
-#msg-erro-zero-division {
+#msg-erro-zero-division,
+#msg-erro-discreto {
   background-color: #c30d0d;
 }
 
@@ -508,7 +510,8 @@ label[for="modaCzuber"].disabled {
 }
 
 #msg-erro-zero-division,
-#msg-erro-outro-vazio {
+#msg-erro-outro-vazio,
+#msg-erro-discreto {
   display: none;
   margin-bottom: 5%;
 }
